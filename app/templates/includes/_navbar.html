@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default navbar-Amethyst" role="navigation" style="margin:10px 0px;">
+	<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <a class="navbar-brand" href="/">kurting</a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+
+    <ul class="nav navbar-nav">
+    	<li></li>
+
+
+ <li {% if url_for('main.index') is current_link %}class="active"{% endif %}>
+                    <a href="{{ url_for('main.index') }}" title="{{ _("ARTICLE") }}">{{ _("ARTICLE") }}</a>
+          </li>
+
+
+         <li {% if url_for('main.about') is current_link %}class="active"{% endif %}>
+                    <a href="{{ url_for('main.about') }}" title="{{ _("ABOUT ME") }}">{{ _("ABOUT ME") }}</a>
+          </li>
+
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+          {% if current_user.is_authenticated() %}
+              <li><a href="#">{{ current_user.username}}</a></li>
+    	    <li id="signin_icon"><a href="{{ url_for('auth.logout') }}">SIGNOUT</a></li>
+		  <li><a href="{{ url_for('main.write') }}">写文章</a></li>
+          {% else %}
+            <li><a href="{{ url_for('auth.login') }}">SIGNIN</a></li>
+          {% endif %}
+
+
+        </ul>
+  </div><!-- /.navbar-collapse -->
+  </div>
+</nav>

@@ -1,0 +1,6 @@
+name: kurting
+version: 1
+
+handlers:
+- url: /app/static/
+  static_path: static

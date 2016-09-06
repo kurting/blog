@@ -1,0 +1,27 @@
+{% import "_macros.html" as macro %}
+{% for post in posts %}
+    <article class="article the-font" style="display:none">
+
+
+        <a href="/post/{{ post.title }}"><h3 style="color:#34495E">{{ post.title }}</h3></a>
+        <p><small><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span style="color:#8C8C8C;">{{ post.timestamp }}</span></small></p>
+        <div class="post-alert">本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议</div>
+
+        <p>{{ post.summary_html|safe }}</p>
+
+        <div style="border-top:1px solid #EBEBEB;padding:10px 5px;margin-top:20px;">
+            <p>
+                <a href="/category/{{ post.category.tag }}">
+                    <span class="label label-default text-left"><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> {{ post.category.tag }}</span> </a>
+            <a href="/post/{{ post.title }}" style="float:right">
+                <button class="btn  btn-primary btn-wide text-right"><span class="glyphicon  glyphicon-fire " aria-hidden="true"></span>  了解更多</button></a>
+               {% if current_user.is_authenticated() %}
+            <a href="{{ url_for('main.edit', title=post.title) }}"><span class="label label-primary"> Edit</span></a>
+               {% endif %}
+            </p>
+        </div>
+    </article>
+{% endfor %}
+    {% if pagination %}
+    {{ macro.pagination_widget(pagination,'.index') }}
+    {% endif %}
